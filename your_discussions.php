@@ -2,6 +2,9 @@
 	session_start();
 	include("config/db.php");
     $isloggedin = isset($_SESSION['user_id']);
+	if (!$isloggedin) {
+		header("Location: login.php");
+	}
 ?>
 
 <!DOCTYPE html>
@@ -138,6 +141,8 @@
 									echo '<footer>';
 									echo '<ul class="actions">';
 									echo '<li><a href="single.php?id=' . $row['id'] . '" class="button large">Continue Reading</a></li>';
+									echo '<li><a href="edit_discussion.php?id=' . $row['id'] . '" class="button large">Edit</a></li>';
+									echo '<li><a href="delete_discussion.php?id=' . $row['id'] . '" class="button large">Delete</a></li>';
 									echo '</ul>';
 									echo '<ul class="stats">';
 									echo '<li> Number of Comments: ' . $row['post_count'] . '</li>';
