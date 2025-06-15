@@ -33,7 +33,7 @@
 								<li><a href="#">Your Discussions</a></li>
 								<li><a href="#">Profile</a></li>
                                 <?php if ($isloggedin): ?>
-                                    <li><a href="index.php">Log Out</a></li>
+                                    <li><a href="logout.php">Log Out</a></li>
                                 <?php else: ?>
                                     <li><a href="register.php">Sign Up</a></li>
                                     <li><a href="login.php">Log in</a></li>
@@ -93,7 +93,7 @@
 							<section>
 								<ul class="actions stacked">
 									<?php if ($isloggedin): ?>
-                                        <li><a href="index.php" class="button fit">Log Out</a></li>
+                                        <li><a href="logout.php" class="button fit">Log Out</a></li>
                                     <?php else: ?>
                                         <li><a href="register.php" class="button fit">Sign Up</a></li>
 									    <li><a href="login.php" class="button large fit">Log In</a></li>
