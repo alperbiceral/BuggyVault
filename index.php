@@ -34,7 +34,7 @@
                                 <?php if ($isloggedin): ?>
                                     <li><a href="#">Log Out</a></li>
                                 <?php else: ?>
-                                    <li><a href="#">Sign Up</a></li>
+                                    <li><a href="register.php">Sign Up</a></li>
                                     <li><a href="#">Log in</a></li>
                                 <?php endif ?>
 							</ul>
@@ -94,7 +94,7 @@
 									<?php if ($isloggedin): ?>
                                         <li><a href="#" class="button fit">Log Out</a></li>
                                     <?php else: ?>
-                                        <li><a href="#" class="button fit">Sign Up</a></li>
+                                        <li><a href="register.php" class="button fit">Sign Up</a></li>
 									    <li><a href="#" class="button large fit">Log In</a></li>
                                     <?php endif; ?>
 								</ul>
@@ -124,8 +124,6 @@
 										<li><a href="single.html" class="button large">Continue Reading</a></li>
 									</ul>
 									<ul class="stats">
-										<li><a href="#">General</a></li>
-										<li><a href="#" class="icon solid fa-heart">28</a></li>
 										<li><a href="#" class="icon solid fa-comment">128</a></li>
 									</ul>
 								</footer>
@@ -150,8 +148,6 @@
 										<li><a href="single.html" class="button large">Continue Reading</a></li>
 									</ul>
 									<ul class="stats">
-										<li><a href="#">General</a></li>
-										<li><a href="#" class="icon solid fa-heart">28</a></li>
 										<li><a href="#" class="icon solid fa-comment">128</a></li>
 									</ul>
 								</footer>
@@ -176,8 +172,6 @@
 										<li><a href="single.html" class="button large">Continue Reading</a></li>
 									</ul>
 									<ul class="stats">
-										<li><a href="#">General</a></li>
-										<li><a href="#" class="icon solid fa-heart">28</a></li>
 										<li><a href="#" class="icon solid fa-comment">128</a></li>
 									</ul>
 								</footer>

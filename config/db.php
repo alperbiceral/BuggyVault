@@ -17,7 +17,6 @@
                 $result->free();
             }
         } while ($conn->more_results() && $conn->next_result());
-        echo "Database initialized successfully.";
     } else {
         echo "Error: " . $conn->error;
     }

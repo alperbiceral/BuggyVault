@@ -1,12 +1,5 @@
 <?php
-    // get the information from the register form 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-
-        
-    }
+    include("config/db.php");
 ?>
 
 <!DOCTYPE html>
@@ -134,10 +127,26 @@
                                 <input type="password" name="password" id="password" required>
                             </div>
                             <br>
-                            <button>Sign Up</button>
+                            <button type="submit">Sign Up</button>
 							</article>
 					</div>
+                    <?php
+                        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                            $username = $_POST['username'];
+                            $email = $_POST['email'];
+                            $password = $_POST['password'];
 
+                            $password = password_hash($password, PASSWORD_BCRYPT);
+
+                            try {
+                                mysqli_query($conn, "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')");
+                                echo "<script>window.location.href='index.php';</script>";
+                            }
+                            catch(Exception $e) {
+								echo "<script>alert(" . json_encode("Error: " . $e->getMessage()) . ");</script>";
+                            }
+                        }
+                    ?>
 				<!-- Sidebar -->
 					<section id="sidebar">
 

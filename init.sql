@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` VARCHAR(100) NOT NULL,
   `role` ENUM('guest', 'moderator') NOT NULL DEFAULT 'guest',
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC)
 );
 
 CREATE TABLE IF NOT EXISTS `discussions` (
@@ -20,9 +20,10 @@ CREATE TABLE IF NOT EXISTS `discussions` (
   `image_path` VARCHAR(255) DEFAULT NULL,
   `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `post_count` INT NOT NULL DEFAULT 0,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_discussions_users_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_discussions_users_idx` (`user_id` ASC),
   CONSTRAINT `fk_discussions_users`
     FOREIGN KEY (`user_id`)
     REFERENCES `buggyvault`.`users` (`id`)
@@ -38,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `discussion_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_posts_discussions_idx` (`discussion_id` ASC) VISIBLE,
-  INDEX `fk_posts_users_idx` (`user_id` ASC) VISIBLE,
+  INDEX `fk_posts_discussions_idx` (`discussion_id` ASC),
+  INDEX `fk_posts_users_idx` (`user_id` ASC),
   CONSTRAINT `fk_posts_discussions`
     FOREIGN KEY (`discussion_id`)
     REFERENCES `buggyvault`.`discussions` (`id`)
