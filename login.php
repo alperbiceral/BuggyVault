@@ -118,39 +118,45 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2>Register</h2>
+										<h2>Log in</h2>
 									</div>
 								</header>
                                 <!-- Registration Form -->
-                    <div class="registration-form">
-                        <form method="post" action="register.php">
+                    <div class="login-form">
+                        <form method="post" action="login.php">
                             <div class="field half first">
                                 <label for="username">Username</label>
                                 <input type="text" name="username" id="username" required>
-                            </div>
-                            <div class="field half">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" required>
                             </div>
                             <div class="field half first">
                                 <label for="password">Password</label>
                                 <input type="password" name="password" id="password" required>
                             </div>
                             <br>
-                            <button type="submit">Sign Up</button>
+                            <button type="submit">Log in</button>
 							</article>
 					</div>
                     <?php
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             $username = $_POST['username'];
-                            $email = $_POST['email'];
                             $password = $_POST['password'];
 
-                            $password = password_hash($password, PASSWORD_BCRYPT);
-
                             try {
-                                mysqli_query($conn, "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')");
-                                echo "<script>window.location.href='index.php';</script>";
+                                $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
+                                if ($user = mysqli_fetch_assoc($result)) {
+                                    if (password_verify($password, $user['password'])) {
+                                        $_SESSION['username'] = $user['username'];
+                                        $_SESSION['user_id'] = $user['id'];
+                                        $_SESSION['role'] = $user['role'];
+                                        echo "<script>window.location.href='index.php';</script>";
+                                    }
+                                    else {
+                                        echo "<script>alert(" . json_encode("Invalid password") . ");</script>";
+                                    }
+                                }
+                                else {
+                                    echo "<script>alert(" . json_encode("Invalid username") . ");</script>";
+                                } 
                             }
                             catch(Exception $e) {
 								echo "<script>alert(" . json_encode("Error: " . $e->getMessage()) . ");</script>";

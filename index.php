@@ -1,6 +1,7 @@
 <?php
+	include("config/db.php");
     session_start();
-    $isloggedin = isset($_SESSION['username']) && !empty($_SESSION['username']);
+    $isloggedin = isset($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
@@ -24,18 +25,22 @@
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="index.html">BuggyVault</a></h1>
+						<h1><a href="index.php">BuggyVault</a></h1>
 						<nav class="links">
 							<ul>
-								<li><a href="#">Home</a></li>
+								<li><a href="index.php">Home</a></li>
                                 <li><a href="#">Create a Discussion</a></li>
 								<li><a href="#">Discussions</a></li>
 								<li><a href="#">Profile</a></li>
                                 <?php if ($isloggedin): ?>
-                                    <li><a href="#">Log Out</a></li>
+                                    <li><a href="index.php">Log Out</a></li>
+									<?php
+										session_unset();
+										session_destroy();
+									?>
                                 <?php else: ?>
                                     <li><a href="register.php">Sign Up</a></li>
-                                    <li><a href="#">Log in</a></li>
+                                    <li><a href="login.php">Log in</a></li>
                                 <?php endif ?>
 							</ul>
 						</nav>
@@ -92,10 +97,14 @@
 							<section>
 								<ul class="actions stacked">
 									<?php if ($isloggedin): ?>
-                                        <li><a href="#" class="button fit">Log Out</a></li>
+                                        <li><a href="index.php" class="button fit">Log Out</a></li>
+										<?php
+											session_unset();
+											session_destroy();
+										?>
                                     <?php else: ?>
                                         <li><a href="register.php" class="button fit">Sign Up</a></li>
-									    <li><a href="#" class="button large fit">Log In</a></li>
+									    <li><a href="login.php" class="button large fit">Log In</a></li>
                                     <?php endif; ?>
 								</ul>
 							</section>
@@ -192,8 +201,8 @@
 							<section id="intro">
 								<a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a>
 								<header>
-									<h2>Future Imperfect</h2>
-									<p>Another fine responsive site template by <a href="http://html5up.net">HTML5 UP</a></p>
+									<h2>Buggy Vault</h2>
+									<p>Post your questions and share your opinions</p>
 								</header>
 							</section>
 
@@ -298,10 +307,7 @@
 						<!-- About -->
 							<section class="blurb">
 								<h2>About</h2>
-								<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.</p>
-								<ul class="actions">
-									<li><a href="#" class="button">Learn More</a></li>
-								</ul>
+								<p>BuggyVault Forum is a deliberately vulnerable PHP-based discussion platform built for educational and ethical hacking purposes. Designed to mimic a real-world forum, it allows users to register, start discussions, and post replies in various threads. The platform includes common web vulnerabilities such as SQL injection, XSS, and broken access control — enabling security researchers, students, and penetration testers to practice identifying and exploiting security flaws in a safe, local environment. Built with PHP and MySQL, BuggyVault Forum also serves as a hands-on resource for understanding secure coding practices by exploring their insecure counterparts.</p>
 							</section>
 
 						<!-- Footer -->
