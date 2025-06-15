@@ -31,7 +31,6 @@
 								<li><a href="index.php">Home</a></li>
                                 <li><a href="create_discussion.php">Create a Discussion</a></li>
 								<li><a href="your_discussions.php">Your Discussions</a></li>
-								<li><a href="#">Profile</a></li>
                                 <?php if ($isloggedin): ?>
                                     <li><a href="logout.php">Log Out</a></li>
                                 <?php else: ?>
@@ -78,12 +77,6 @@
 										<a href="your_discussions.php">
 											<h3>Display Discussions</h3>
 											<p>See the discussions you created or commented</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<h3>Profile</h3>
-											<p>See your profile page</p>
 										</a>
 									</li>
 								</ul>
