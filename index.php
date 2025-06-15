@@ -186,7 +186,10 @@
 												$name = mysqli_fetch_assoc(mysqli_query($conn, "SELECT username FROM users WHERE id = " . $row['user_id']));
 												echo 'Author: ' . $name['username'];
 												echo '</header>';
+												echo '<footer>';
 												echo '<a href="single.php?id=' . $row['id'] . '" class="image"><img src="' . $row['image_path'] . '" alt="" /></a>';
+												echo '<h5>Comments: ' . htmlspecialchars($row['post_count']) . '</h5>';
+												echo '</footer>';
 												echo '</article>';
 											}
 										} else {

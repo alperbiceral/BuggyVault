@@ -136,6 +136,7 @@
                             </div>
                             <br>
                             <button type="submit">Create</button>
+									</form>
 							</article>
 					</div>
                     <?php
@@ -153,23 +154,19 @@
                                 }
 
                                 if (!move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
-                                    die("Failed to move uploaded file.");
+                                    $target_file = ""; // Handle the case where file upload fails
+									die("Failed to move uploaded file.");
                                 }
 
                             } else {
-                                $target_file = null; // Handle the case where no image is uploaded
+                                $target_file = ""; // Handle the case where no image is uploaded
                             }
                             
                             $content = $_POST['content'];
                             $user_id = $_SESSION['user_id'];
 
                             try {
-                                if (empty($target_file)) {
-                                    mysqli_query($conn, "INSERT INTO discussions (title, content, user_id) VALUES ('$title', '$content', '$user_id')");
-                                }
-                                else {
-                                    mysqli_query($conn, "INSERT INTO discussions (title, content, image_path, user_id) VALUES ('$title', '$content', '$target_file', '$user_id')");
-                                }
+                                mysqli_query($conn, "INSERT INTO discussions (title, content, image_path, user_id) VALUES ('$title', '$content', '$target_file', '$user_id')");
                                 echo "<script>window.location.href='index.php';</script>";
                             }
                             catch(Exception $e) {
