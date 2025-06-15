@@ -8,7 +8,7 @@
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sqlFile = __DIR__ . '/init.sql';
+    $sqlFile = __DIR__ . '/../init.sql';
     $sql = file_get_contents($sqlFile);
 
     if ($conn->multi_query($sql)) {
