@@ -45,7 +45,15 @@
 								<li class="search">
 									<a class="fa-search" href="#search">Search</a>
 									<form id="search" method="get" action="#">
-										<input type="text" name="query" placeholder="Search" />
+										<input type="text" name="query" placeholder="Search"/>
+										<?php
+											if (isset($_GET['query'])) {
+												$query = htmlspecialchars($_GET['query']);
+											}
+											else {
+												$query = null;
+											}
+										?>
 									</form>
 								</li>
 								<li class="menu">
@@ -106,7 +114,12 @@
 				<!-- Main -->
 					<div id="main">
 						<?php
-							$sql = "SELECT * FROM discussions ORDER BY created_at DESC LIMIT 3";
+							if (isset($_GET['query']) && !empty($_GET['query'])) {
+								$sql = "SELECT * FROM discussions WHERE title LIKE '%{$query}%' ORDER BY created_at DESC LIMIT 3";
+							} else {
+								$sql = "SELECT * FROM discussions ORDER BY created_at DESC LIMIT 3";
+							}
+							
 							$result = mysqli_query($conn, $sql);
 							if (mysqli_num_rows($result) > 0) {
 								while ($row = mysqli_fetch_assoc($result)) {
@@ -118,7 +131,7 @@
 									echo '<div class="meta">';
 									echo '<time class="published" datetime="' . $row['created_at'] . '">' . date('F j, Y', strtotime($row['created_at'])) . '</time>';
 									$name = mysqli_fetch_assoc(mysqli_query($conn, "SELECT username FROM users WHERE id = " . $row['user_id']));
-									echo '<a href="#" class="author"><span class="name">' . $name['username'] . '</span></a>';
+									echo '<span class="name">Author: ' . $name['username'] . '</span>';
 									echo '</div>';
 									echo '</header>';
 									echo '<a href="single.php?id=' . $row['id'] . '" class="image featured"><img src="' . $row['image_path'] . '" alt=""/></a>';
@@ -171,7 +184,7 @@
 												echo '<h3><a href="single.php?id=' . $row['id'] . '">' . htmlspecialchars($row['title']) . '</a></h3>';
 												echo '<time class="published" datetime="' . $row['created_at'] . '">' . date('F j, Y', strtotime($row['created_at'])) . '</time>';
 												$name = mysqli_fetch_assoc(mysqli_query($conn, "SELECT username FROM users WHERE id = " . $row['user_id']));
-												echo '<a href="#" class="author">' . $name['username'] . '</a>';
+												echo 'Author: ' . $name['username'];
 												echo '</header>';
 												echo '<a href="single.php?id=' . $row['id'] . '" class="image"><img src="' . $row['image_path'] . '" alt="" /></a>';
 												echo '</article>';
