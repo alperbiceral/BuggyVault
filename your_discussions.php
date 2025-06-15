@@ -106,7 +106,7 @@
 				<!-- Main -->
 					<div id="main">
 						<?php
-							$sql = "SELECT * FROM discussions ORDER BY created_at DESC LIMIT 3";
+							$sql = "SELECT * FROM discussions WHERE user_id = " . $_SESSION['user_id'] . " ORDER BY created_at DESC LIMIT 3";
 							$result = mysqli_query($conn, $sql);
 							if (mysqli_num_rows($result) > 0) {
 								while ($row = mysqli_fetch_assoc($result)) {
@@ -162,7 +162,7 @@
 							<section>
 								<div class="mini-posts">
 									<?php
-										$sql = "SELECT * FROM discussions ORDER BY post_count DESC LIMIT 4";
+										$sql = "SELECT * FROM discussions WHERE user_id = " . $_SESSION['user_id'] . " ORDER BY post_count DESC LIMIT 4";
 										$result = mysqli_query($conn, $sql);
 										if (mysqli_num_rows($result) > 0) {
 											while ($row = mysqli_fetch_assoc($result)) {
