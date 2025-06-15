@@ -1,6 +1,6 @@
 <?php
+	session_start();
 	include("config/db.php");
-    session_start();
     $isloggedin = isset($_SESSION['user_id']);
 ?>
 
@@ -29,15 +29,11 @@
 						<nav class="links">
 							<ul>
 								<li><a href="index.php">Home</a></li>
-                                <li><a href="#">Create a Discussion</a></li>
-								<li><a href="#">Discussions</a></li>
+                                <li><a href="create_discussion.php">Create a Discussion</a></li>
+								<li><a href="#">Your Discussions</a></li>
 								<li><a href="#">Profile</a></li>
                                 <?php if ($isloggedin): ?>
                                     <li><a href="index.php">Log Out</a></li>
-									<?php
-										session_unset();
-										session_destroy();
-									?>
                                 <?php else: ?>
                                     <li><a href="register.php">Sign Up</a></li>
                                     <li><a href="login.php">Log in</a></li>
@@ -98,10 +94,6 @@
 								<ul class="actions stacked">
 									<?php if ($isloggedin): ?>
                                         <li><a href="index.php" class="button fit">Log Out</a></li>
-										<?php
-											session_unset();
-											session_destroy();
-										?>
                                     <?php else: ?>
                                         <li><a href="register.php" class="button fit">Sign Up</a></li>
 									    <li><a href="login.php" class="button large fit">Log In</a></li>

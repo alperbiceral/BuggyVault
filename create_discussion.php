@@ -2,6 +2,10 @@
     session_start();
     include("config/db.php");
     $isloggedin = isset($_SESSION['user_id']);
+    if (!$isloggedin) {
+        echo "<script>alert('You have to log in first to create a discussion" . $isloggedin . "');window.location.href='login.php';</script>";
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -110,45 +114,63 @@
 							<article class="post">
 								<header>
 									<div class="title">
-										<h2>Log in</h2>
+										<h2>Create a Discussion</h2>
 									</div>
 								</header>
-                                <!-- Registration Form -->
-                    <div class="login-form">
-                        <form method="post" action="login.php">
+                                <!-- Create Discussion Form -->
+                    <div class="create-discussion-form">
+                        <form method="post" action="create_discussion.php" enctype="multipart/form-data">
                             <div class="field half first">
-                                <label for="username">Username</label>
-                                <input type="text" name="username" id="username" required>
-                            </div>
-                            <div class="field half first">
-                                <label for="password">Password</label>
-                                <input type="password" name="password" id="password" required>
+                                <label for="title">Title</label>
+                                <input type="text" name="title" id="title" required>
                             </div>
                             <br>
-                            <button type="submit">Log in</button>
+                            <div class="field half first">
+                                <label for="image">Image (optional)</label>
+                                <input type="file" name="image" id="image">
+                            </div>
+                            <br>
+                            <div class="field half first">
+                                <label for="content">Content</label>
+                                <input type="text" name="content" id="content" required>
+                            </div>
+                            <br>
+                            <button type="submit">Create</button>
 							</article>
 					</div>
                     <?php
                         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                            $username = $_POST['username'];
-                            $password = $_POST['password'];
+                            
+                            $title = $_POST['title'];
+                            
+                            if  (isset($_FILES['image']) && $_FILES['image']['error'] == UPLOAD_ERR_OK) {
+                                $image = $_FILES['image']['name'];
+                                $target_dir = "images/";
+                                $target_file = $target_dir . basename($image);
+
+                                if (!is_dir($target_dir)) {
+                                    mkdir($target_dir, 0777, true);
+                                }
+
+                                if (!move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
+                                    die("Failed to move uploaded file.");
+                                }
+
+                            } else {
+                                $target_file = null; // Handle the case where no image is uploaded
+                            }
+                            
+                            $content = $_POST['content'];
+                            $user_id = $_SESSION['user_id'];
 
                             try {
-                                $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
-                                if ($user = mysqli_fetch_assoc($result)) {
-                                    if (password_verify($password, $user['password'])) {
-                                        $_SESSION['username'] = $user['username'];
-                                        $_SESSION['user_id'] = $user['id'];
-                                        $_SESSION['role'] = $user['role'];
-                                        echo "<script>window.location.href='index.php';</script>";
-                                    }
-                                    else {
-                                        echo "<script>alert(" . json_encode("Invalid password") . ");</script>";
-                                    }
+                                if (empty($target_file)) {
+                                    mysqli_query($conn, "INSERT INTO discussions (title, content, user_id) VALUES ('$title', '$content', '$user_id')");
                                 }
                                 else {
-                                    echo "<script>alert(" . json_encode("Invalid username") . ");</script>";
-                                } 
+                                    mysqli_query($conn, "INSERT INTO discussions (title, content, image_path, user_id) VALUES ('$title', '$content', '$target_file', '$user_id')");
+                                }
+                                echo "<script>window.location.href='index.php';</script>";
                             }
                             catch(Exception $e) {
 								echo "<script>alert(" . json_encode("Error: " . $e->getMessage()) . ");</script>";
