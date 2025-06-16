@@ -1,12 +1,10 @@
 @import url(fontawesome-all.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Raleway:400,800,900");
-
 /*
 	Future Imperfect by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
-
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
 pre, a, abbr, acronym, address, big, cite,
@@ -28,80 +26,61 @@ section, summary, time, mark, audio, video {
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;}
-
 body {
 	line-height: 1;
 }
-
 ol, ul {
 	list-style: none;
 }
-
 blockquote, q {
 	quotes: none;
 }
-
 	blockquote:before, blockquote:after, q:before, q:after {
 		content: '';
 		content: none;
 	}
-
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
 body {
 	-webkit-text-size-adjust: none;
 }
-
 mark {
 	background-color: transparent;
 	color: inherit;
 }
-
 input::-moz-focus-inner {
 	border: 0;
 	padding: 0;
 }
-
 input, select, textarea {
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	-ms-appearance: none;
 	appearance: none;
 }
-
 /* Basic */
-
 	@-ms-viewport {
 		width: device-width;
 	}
-
 	body {
 		-ms-overflow-style: scrollbar;
 	}
-
 	@media screen and (max-width: 480px) {
-
 		html, body {
 			min-width: 320px;
 		}
-
 	}
-
 	html {
 		box-sizing: border-box;
 	}
-
 	*, *:before, *:after {
 		box-sizing: inherit;
 	}
-
 	body {
 		background: #f4f4f4;
 	}
-
 		body.is-preload *, body.is-preload *:before, body.is-preload *:after {
 			-moz-animation: none !important;
 			-webkit-animation: none !important;
@@ -112,9 +91,7 @@ input, select, textarea {
 			-ms-transition: none !important;
 			transition: none !important;
 		}
-
 /* Type */
-
 	body, input, select, textarea {
 		color: #646464;
 		font-family: "Source Sans Pro", Helvetica, sans-serif;
@@ -122,23 +99,16 @@ input, select, textarea {
 		font-weight: 400;
 		line-height: 1.75;
 	}
-
 		@media screen and (max-width: 1680px) {
-
 			body, input, select, textarea {
 				font-size: 12pt;
 			}
-
 		}
-
 		@media screen and (max-width: 1280px) {
-
 			body, input, select, textarea {
 				font-size: 12pt;
 			}
-
 		}
-
 		@media screen and (max-width: 980px) {
 
 			body, input, select, textarea {
