@@ -5,24 +5,24 @@ BuggyVault is a penetration testing web application. It seems like a forum websi
 * clone the repository inside the xampp/htdocs folder
 * reach out the application from localhost/buggyvault
 ## File Hierarchy
-BuggyVault/
-├── config/
-│   └── db.php             # Database connection
-├── images/                # User-uploaded images
-├── assets/                # CSS/JS files
-├── static/                # application's images
-├── index.php              # Home page
-├── login.php              # Login page
-├── logout.php             # Logout feature
-├── register.php           # Register page
-├── create_discussion.php  # Form to create a new discussion
-├── delete_discussion.php  # Delete a Discussion
-├── delete_post.php        # Delete a Post
-├── edit_discussion.php    # Edit an existing discussion
-├── your_discussions.php   # View user’s own discussions
-├── single.php             # Single discussion view
-├── init.sql               # Database tables
-├── .gitignore
+BuggyVault/<br>
+├── config/<br>
+│   └── db.php             # Database connection<br>
+├── images/                # User-uploaded images<br>
+├── assets/                # CSS/JS files<br>
+├── static/                # application's images<br>
+├── index.php              # Home page<br>
+├── login.php              # Login page<br>
+├── logout.php             # Logout feature<br>
+├── register.php           # Register page<br>
+├── create_discussion.php  # Form to create a new discussion<br>
+├── delete_discussion.php  # Delete a Discussion<br>
+├── delete_post.php        # Delete a Post<br>
+├── edit_discussion.php    # Edit an existing discussion<br>
+├── your_discussions.php   # View user’s own discussions<br>
+├── single.php             # Single discussion view<br>
+├── init.sql               # Database tables<br>
+├── .gitignore<br>
 └── README.md
 ## Frontend
 html5up.net | @ajlkn
