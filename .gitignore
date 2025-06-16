@@ -1,5 +1,6 @@
-# Ignore everything in the images/ directory
-/images/*
+/images/*.png
+/images/*.php
+/images/*.jpeg
 
-# But do not ignore the .gitkeep file (optional) to keep the folder in the repo
 !/images/.gitkeep
+!/images/thumbs_up.png
