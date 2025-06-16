@@ -1,7 +1,7 @@
 # BuggyVault
 BuggyVault is a penetration testing web application. It seems like a forum website and you can interact with the application as a forum application. There are some simple vulnerabilities like SQL Injection, XSS, and IDOR.
 
-You can find the explanation of the vulnerabilities inside the vulnerability_notes.md
+You can find the explanation of the vulnerabilities inside the [vulnerability_notes.md](/vulnerability.md)
 ## Build Instructions
 * install XAMPP Web Server
 * clone the repository inside the xampp/htdocs folder
@@ -24,6 +24,7 @@ BuggyVault/<br>
 ├── your_discussions.php   # View user’s own discussions<br>
 ├── single.php             # Single discussion view<br>
 ├── init.sql               # Database tables<br>
+├── vulnerability_notes.md # Application's vulnerabilities<br>
 ├── .gitignore<br>
 └── README.md
 ## Frontend
