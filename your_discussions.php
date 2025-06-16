@@ -156,7 +156,7 @@
 
 						<!-- Intro -->
 							<section id="intro">
-								<a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a>
+								<a href="#" class="logo"><img src="static/favicon.ico" alt="" /></a>
 								<header>
 									<h2>Buggy Vault</h2>
 									<p>Post your questions and share your opinions</p>
