@@ -51,24 +51,118 @@ CREATE TABLE IF NOT EXISTS `posts` (
     ON DELETE CASCADE
 );
 
-INSERT INTO `users` (`username`, `password`, `email`, `role`)
+INSERT IGNORE INTO `users` (`username`, `password`, `email`, `role`)
 VALUES
 ('crazyboy', 'letmein', 'crazyboy@email.com', 'guest'),
 ('godfather', 'pass123', 'godfather@email.com', 'guest'),
 ('sindirella', 'sindirella123', 'sindirella@email.com', 'guest');
 
 INSERT INTO `discussions` (`title`, `content`, `image_path`, `user_id`)
-VALUES
-('Let`s discuss', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', "images/lets_discuss.jpg", 1),
-('OMG What Happened!!', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', "images/omg.jpg", 1),
-('BuggyVault is a nice place', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', "images/thumbs_up.png", 3);
-('I`m hiring a driver', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', "images/driver.jpg", 2);
+SELECT * FROM (SELECT
+  'Let`s discuss' AS `title`,
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' AS `content`,
+  'images/lets_discuss.jpg' AS `image_path`,
+  1 AS `user_id`
+) AS `tmp`
+WHERE NOT EXISTS (
+  SELECT 1 FROM `discussions` WHERE `title` = 'Let`s discuss' AND `user_id` = 1
+);
+
+INSERT INTO `discussions` (`title`, `content`, `image_path`, `user_id`)
+SELECT * FROM (SELECT
+  'OMG What Happened!!' AS `title`,
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' AS `content`,
+  'images/omg.jpg' AS `image_path`,
+  1 AS `user_id`
+) AS `tmp`
+WHERE NOT EXISTS (
+  SELECT 1 FROM `discussions` WHERE `title` = 'OMG What Happened!!' AND `user_id` = 1
+);
+
+INSERT INTO `discussions` (`title`, `content`, `image_path`, `user_id`)
+SELECT * FROM (SELECT
+  'BuggyVault is a nice place' AS `title`,
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' AS `content`,
+  'images/thumbs_up.png' AS `image_path`,
+  2 AS `user_id`
+) AS `tmp`
+WHERE NOT EXISTS (
+  SELECT 2 FROM `discussions` WHERE `title` = 'BuggyVault is a nice place' AND `user_id` = 2
+);
+
+INSERT INTO `discussions` (`title`, `content`, `image_path`, `user_id`)
+SELECT * FROM (SELECT
+  'I`m hiring a driver' AS `title`,
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.' AS `content`,
+  'images/driver.jpg' AS `image_path`,
+  3 AS `user_id`
+) AS `tmp`
+WHERE NOT EXISTS (
+  SELECT 3 FROM `discussions` WHERE `title` = 'I`m hiring a driver' AND `user_id` = 3
+);
 
 INSERT INTO `posts` (`content`, `image_path`, `discussion_id`, `user_id`)
-VALUES
-('I think it is a good idea to discuss this topic.', "images/thumbs_up.png", 1, 2),
-('I agree with you, let`s talk about it.', "images/thumbs_up.png", 1, 3),
-('I think we should focus on the bugs first.', "images/thumbs_up.png", 2, 1),
-('I have some ideas about the bugs.', "images/thumbs_up.png", 2, 3),
-('I love this place!', "images/thumbs_up.png", 3, 1),
-('I think we can make it even better!', "images/thumbs_up.png", 3, 2);
+SELECT * FROM (SELECT
+  'I think it is a good idea to discuss this topic.' AS `content`,
+  'images/thumbs_up.png' AS `content`,
+  1 AS `discussion_id`,
+  1 AS `user_id`
+) AS `tmp`
+WHERE NOT EXISTS (
+  SELECT 1 FROM `posts` WHERE `content` = 'I think it is a good idea to discuss this topic.' AND `user_id` = 1
+);
+
+INSERT INTO `posts` (`content`, `image_path`, `discussion_id`, `user_id`)
+SELECT * FROM (SELECT
+  'I agree with you, let`s talk about it.' AS `content`,
+  'images/thumbs_up.png' AS `content`,
+  1 AS `discussion_id`,
+  2 AS `user_id`
+) AS `tmp`
+WHERE NOT EXISTS (
+  SELECT 1 FROM `posts` WHERE `content` = 'I agree with you, let`s talk about it.' AND `user_id` = 2
+);
+
+INSERT INTO `posts` (`content`, `image_path`, `discussion_id`, `user_id`)
+SELECT * FROM (SELECT
+  'I think we should focus on the bugs first.' AS `content`,
+  'images/thumbs_up.png' AS `content`,
+  2 AS `discussion_id`,
+  3 AS `user_id`
+) AS `tmp`
+WHERE NOT EXISTS (
+  SELECT 1 FROM `posts` WHERE `content` = 'I think we should focus on the bugs first.' AND `user_id` = 3
+);
+
+INSERT INTO `posts` (`content`, `image_path`, `discussion_id`, `user_id`)
+SELECT * FROM (SELECT
+  'I have some ideas about the bugs.' AS `content`,
+  'images/thumbs_up.png' AS `content`,
+  2 AS `discussion_id`,
+  1 AS `user_id`
+) AS `tmp`
+WHERE NOT EXISTS (
+  SELECT 1 FROM `posts` WHERE `content` = 'I have some ideas about the bugs.' AND `user_id` = 1
+);
+
+INSERT INTO `posts` (`content`, `image_path`, `discussion_id`, `user_id`)
+SELECT * FROM (SELECT
+  'I love this place!' AS `content`,
+  'images/thumbs_up.png' AS `content`,
+  3 AS `discussion_id`,
+  2 AS `user_id`
+) AS `tmp`
+WHERE NOT EXISTS (
+  SELECT 1 FROM `posts` WHERE `content` = 'I love this place!' AND `user_id` = 2
+);
+
+INSERT INTO `posts` (`content`, `image_path`, `discussion_id`, `user_id`)
+SELECT * FROM (SELECT
+  'I think we can make it even better!' AS `content`,
+  'images/thumbs_up.png' AS `content`,
+  3 AS `discussion_id`,
+  3 AS `user_id`
+) AS `tmp`
+WHERE NOT EXISTS (
+  SELECT 1 FROM `posts` WHERE `content` = 'I think we can make it even better!' AND `user_id` = 3
+);
