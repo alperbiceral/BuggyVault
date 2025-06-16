@@ -112,9 +112,9 @@
 					<div id="main">
 						<?php
 							if (isset($_GET['query']) && !empty($_GET['query'])) {
-								$sql = "SELECT * FROM discussions WHERE title LIKE '%{$query}%' AND user_id = " . $_SESSION['user_id'] . " ORDER BY created_at DESC LIMIT 3";
+								$sql = "SELECT * FROM discussions WHERE title LIKE '%{$query}%' AND user_id = " . $_SESSION['user_id'] . " ORDER BY created_at DESC";
 							} else {
-								$sql = "SELECT * FROM discussions WHERE user_id = " . $_SESSION['user_id'] . " ORDER BY created_at DESC LIMIT 3";
+								$sql = "SELECT * FROM discussions WHERE user_id = " . $_SESSION['user_id'] . " ORDER BY created_at DESC";
 							}
 							$result = mysqli_query($conn, $sql);
 							if (mysqli_num_rows($result) > 0) {
@@ -148,12 +148,6 @@
 								echo '<p>No discussions found.</p>';
 							}
 						?>
-
-						<!-- Pagination -->
-							<ul class="actions pagination">
-								<li><a href="" class="disabled button large previous">Previous Page</a></li>
-								<li><a href="#" class="button large next">Next Page</a></li>
-							</ul>
 
 					</div>
 
