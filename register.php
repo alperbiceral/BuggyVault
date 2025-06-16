@@ -111,8 +111,6 @@
                             $email = $_POST['email'];
                             $password = $_POST['password'];
 
-                            $password = password_hash($password, PASSWORD_BCRYPT);
-
                             try {
                                 mysqli_query($conn, "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')");
                                 echo "<script>window.location.href='index.php';</script>";

@@ -17,7 +17,7 @@
             exit();
         }
         
-        $sql = "DELETE FROM posts WHERE id = $post_id AND user_id = " . $_SESSION['user_id'];
+        $sql = "DELETE FROM posts WHERE id = $post_id";
         if (mysqli_query($conn, $sql)) {
             echo "<script>alert('Post deleted successfully');window.location.href='single.php?id={$disc_id}';</script>";
             $sql2 = "UPDATE discussions SET post_count = post_count - 1 WHERE id = $disc_id";

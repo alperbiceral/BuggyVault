@@ -107,20 +107,15 @@
                             $password = $_POST['password'];
 
                             try {
-                                $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
+                                $result = mysqli_query($conn, "SELECT * FROM users WHERE password = '$password' AND username = '$username'");
                                 if ($user = mysqli_fetch_assoc($result)) {
-                                    if (password_verify($password, $user['password'])) {
-                                        $_SESSION['username'] = $user['username'];
-                                        $_SESSION['user_id'] = $user['id'];
-                                        $_SESSION['role'] = $user['role'];
-                                        echo "<script>window.location.href='index.php';</script>";
-                                    }
-                                    else {
-                                        echo "<script>alert(" . json_encode("Invalid password") . ");</script>";
-                                    }
+									$_SESSION['username'] = $user['username'];
+									$_SESSION['user_id'] = $user['id'];
+									$_SESSION['role'] = $user['role'];
+									echo "<script>window.location.href='index.php';</script>";
                                 }
                                 else {
-                                    echo "<script>alert(" . json_encode("Invalid username") . ");</script>";
+                                    echo "<script>alert(" . json_encode("Invalid credentials") . ");</script>";
                                 } 
                             }
                             catch(Exception $e) {

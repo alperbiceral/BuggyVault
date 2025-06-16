@@ -65,14 +65,6 @@
 							<section>
 								<form class="search" method="get" action="#">
 									<input type="text" name="query" placeholder="Search" />
-									<?php
-										if (isset($_GET['query'])) {
-											$query = htmlspecialchars($_GET['query']);
-										}
-										else {
-											$query = null;
-										}
-									?>
 								</form>
 							</section>
 
@@ -112,7 +104,7 @@
 					<div id="main">
 						<?php
 							if (isset($_GET['query']) && !empty($_GET['query'])) {
-								$sql = "SELECT * FROM discussions WHERE title LIKE '%{$query}%' AND user_id = " . $_SESSION['user_id'] . " ORDER BY created_at DESC";
+								$sql = "SELECT * FROM discussions WHERE title LIKE '%" . $_GET['query'] . "%' AND user_id = " . $_SESSION['user_id'] . " ORDER BY created_at DESC";
 							} else {
 								$sql = "SELECT * FROM discussions WHERE user_id = " . $_SESSION['user_id'] . " ORDER BY created_at DESC";
 							}
