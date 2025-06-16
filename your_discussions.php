@@ -3,7 +3,8 @@
 	include("config/db.php");
     $isloggedin = isset($_SESSION['user_id']);
 	if (!$isloggedin) {
-		header("Location: login.php");
+		echo "<script>alert('You must be logged in to view this page.');window.location.href = 'login.php';</script>";
+		exit();
 	}
 ?>
 

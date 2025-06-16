@@ -39,38 +39,10 @@
                                 <?php endif ?>
 							</ul>
 						</nav>
-						<nav class="main">
-							<ul>
-								<li class="search">
-									<a class="fa-search" href="#search">Search</a>
-									<form id="search" method="get" action="#">
-										<input type="text" name="query" placeholder="Search"/>
-										<?php
-											if (isset($_GET['query'])) {
-												$query = htmlspecialchars($_GET['query']);
-											}
-											else {
-												$query = null;
-											}
-										?>
-									</form>
-								</li>
-								<li class="menu">
-									<a class="fa-bars" href="#menu">Menu</a>
-								</li>
-							</ul>
-						</nav>
 					</header>
 
 				<!-- Menu -->
 					<section id="menu">
-
-						<!-- Search -->
-							<section>
-								<form class="search" method="get" action="#">
-									<input type="text" name="query" placeholder="Search" />
-								</form>
-							</section>
 
 						<!-- Links -->
 							<section>
@@ -160,7 +132,7 @@
 										echo '</div>';
 										echo '<button class="button large">Post Comment</button>';
 									echo '</form>';
-									if ($_SERVER["REQUEST_METHOD"] == "POST") {
+									if ($_SERVER["REQUEST_METHOD"] == "POST" and !empty($_SESSION['user_id'])) {
 										$content = htmlspecialchars($_POST['comment']);
 										$user_id = $_SESSION['user_id'];
 
@@ -191,7 +163,7 @@
 									echo '</footer>';
 		 							echo '</article>';
 							} else {
-								echo '<p>No discussions found.</p>';
+								echo '<script>alert("discussion not found or you need to login");window.location.href="single.php?id=$disc_id";</script>';
 							}
 						?>
 
