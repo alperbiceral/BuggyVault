@@ -148,7 +148,7 @@
 
 						<!-- Intro -->
 							<section id="intro">
-								<a href="#" class="logo"><img src="static/favicon.ico" alt="" /></a>
+								<a href="index.php" class="logo"><img src="static/favicon.ico" alt="" /></a>
 								<header>
 									<h2>Buggy Vault</h2>
 									<p>Post your questions and share your opinions</p>
